@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.log.vader">
+
+    <application>
+        <provider
+            android:name=".VaderContextProvider"
+            android:authorities="${applicationId}.applicationprovider"
+            android:exported="false"
+            android:initOrder="100" />
+    </application>
+</manifest>

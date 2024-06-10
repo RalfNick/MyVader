@@ -1,0 +1,75 @@
+apply from: "$rootDir/versionConfig.gradle"
+
+buildscript {
+    repositories {
+        maven {
+            url 'http://nexus.corp.kuaishou.com:88/nexus/content/groups/public/'
+            credentials {
+                username "maven_user"
+                password "woShiMiMamuserwoiesldf"
+            }
+            authentication {
+                basic(BasicAuthentication)
+                digest(DigestAuthentication)
+            }
+        }
+        maven {
+            url 'http://nexus.corp.kuaishou.com:88/nexus/content/repositories/releases/'
+            credentials {
+                username "maven_user"
+                password "woShiMiMamuserwoiesldf"
+            }
+            authentication {
+                basic(BasicAuthentication)
+                digest(DigestAuthentication)
+            }
+        }
+        maven { // 代理mavenCentral
+            url 'http://nexus.corp.kuaishou.com:88/nexus/content/repositories/central/'
+            credentials {
+                username "maven_user"
+                password "woShiMiMamuserwoiesldf"
+            }
+
+            authentication {
+                basic(BasicAuthentication)
+                digest(DigestAuthentication)
+            }
+        }
+        maven { // 代理jcenter
+            url 'http://nexus.corp.kuaishou.com:88/nexus/content/repositories/jcenter/'
+            credentials {
+                username "maven_user"
+                password "woShiMiMamuserwoiesldf"
+            }
+            authentication {
+                basic(BasicAuthentication)
+                digest(DigestAuthentication)
+            }
+        }
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:4.0.2"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.21"
+
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    def rootRepositories = rootProject.buildscript.repositories
+    rootRepositories.each { repo ->
+        repositories.add(repo)
+        buildscript.repositories.add(repo)
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

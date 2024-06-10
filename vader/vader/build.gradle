@@ -1,0 +1,54 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        consumerProguardFiles 'consumer-rules.pro'
+
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility rootProject.ext.sourceCompatibility
+        targetCompatibility rootProject.ext.sourceCompatibility
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    testImplementation rootProject.deps.junit
+    androidTestImplementation rootProject.deps.android_test_junit
+    androidTestImplementation rootProject.deps.android_test_runner
+    androidTestImplementation rootProject.deps.android_test_espresso
+
+    testImplementation 'kuaishou:kuaishou-common-proto-nano:1.1.220'
+    androidTestImplementation 'kuaishou:kuaishou-common-proto-nano:1.1.220'
+
+    implementation rootProject.deps.app_compat
+    implementation rootProject.deps.gson
+    implementation rootProject.deps.rx_java
+    implementation rootProject.deps.rx_android
+    implementation rootProject.deps.rx_kotlin
+    implementation rootProject.deps.kotlin_stdlib
+    implementation rootProject.deps.core_ktx
+    implementation rootProject.deps.protobuf
+    implementation rootProject.deps.annotation
+    // room
+    implementation rootProject.deps.room_runtime
+    implementation rootProject.deps.room_ktx
+    kapt rootProject.deps.room_processor
+    androidTestImplementation rootProject.deps.room_testing
+}
